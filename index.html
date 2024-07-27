@@ -1,0 +1,198 @@
+<html>
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Stone Paper Scissor</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+        
+        <style>
+
+            li{
+                padding: 0.5rem;
+                list-style-type: none;
+            }
+        
+            .bg-dark {
+                --bs-bg-opacity: 0.7;
+            }
+            
+            .color{
+                color: #ffbf00;
+            }
+
+            .gradient-custom {
+                background: #6a11cb;
+                background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+                background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+            }
+
+        </style>  
+        
+    </head>
+      
+    <body
+    style="background: #6a11cb;
+            background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+            background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));">
+
+        <script>
+            
+            // Incase of error display page :
+            // const err = ()=>{
+            //     document.body.style.background = "black"
+
+            //     document.getElementById('msg').innerText= "Error"
+            //     document.getElementById('inpmsg').innerText= "! PLEASE ENTER INPUT TO PLAY !"
+
+            //     document.getElementById('input').style.display ='none'
+            //     document.getElementById('pl').style.display ='none'
+            //     document.getElementById('plag').style.display ='none';
+            //     document.getElementById('try').style.display ='inline-block'
+                
+            // }
+            
+            const game = ()=>
+            {
+                    let user = document.getElementById('input').value
+                    //prompt('Enter input : [ S : Stone, P : Paper, SC : Scissor ]')
+                    user = user.toUpperCase()
+                    let dbox = document.getElementById('input')
+
+                    if(user == ""){                        
+                        dbox.style.backgroundColor = "#b1b1b1c2"
+                        dbox.style.color = "white"
+                        document.getElementById('errmsg').style.display ="inline-block";
+                        document.getElementById('errmsg').style.color ="white";
+                        document.getElementById('errmsg').innerText='Please Enter Input'
+                        document.getElementById('bground').style.background= "#8f000ea6";
+                    }
+                
+                    else if(user !== "S" && user !== "P" && user !== "SC"){
+                        //alert('Please only enter [S] or [SC] or [P] to play the game')
+                        document.getElementById('errmsg').style.display ="inline-block";
+                        document.getElementById('errmsg').style.color ="white";
+                        document.getElementById('errmsg').innerText='please enter \"S\" or \"P\" or \"SC\" only'
+                        document.getElementById('bground').style.background= "#8f000ea6";
+                        // return window.location.reload();
+                    }
+
+                    else{
+                                                
+                        dbox.style.backgroundColor = "white"
+                        dbox.style.color = "black"
+                        let S = "Stone"
+                        let P = "Paper"
+                        let SC = "Scissor"
+
+                        let cpu1 = Math.floor(Math.random()*3)            
+                        let cpu = ['S','P','SC'][cpu1]
+                        console.log(typeof cpu1)
+                        //document.write('Generated value is : ',cpu,"</br>")
+                
+                        const match = (cpu, user)=>{
+                            if(cpu === user){
+                                return 'Its a tie'
+                            }
+                            else if(cpu === "S" && user === "P"){
+                                return "user"                                                       
+                            }
+                            else if(cpu === "P" && user === "SC"){
+                                return "user"                            
+                            }
+                            else if(cpu === "SC" && user === "S"){
+                                return "user"                            
+                            }
+                            else if(cpu === "P" && user === "S"){
+                                return "cpu"
+                            }
+                            else if(cpu === "SC" && user === "P"){
+                                return "cpu"
+                            }
+                            else if(cpu === "S" && user === "SC"){
+                                return "cpu"
+                            }
+                        }
+                        let result = match(cpu,user)
+                        //document.write(`CPU : ${cpu} & User : ${user}</br>The winner is : `+result)
+                        document.getElementById('input').value=result;
+                        document.getElementById('input').readOnly = true;
+                        if(result == "user"){
+                            document.body.style.background = "#00381e"
+                            //document.body.style.color = "white"                            
+                        }
+                        else if(result == "cpu"){
+                            document.body.style.background = "#a70010"
+                            //document.body.style.color = "white"                            
+                        }
+                        else if(result = "Its a tie"){
+                            document.body.style.background = "#ffc107"
+                            //document.body.style.color = "gray"
+                        }
+                        document.getElementById('bground').style.background= " rgba(0, 0, 0, 0.64)";
+
+                        document.getElementById('msg').innerText= "The Winner Is : "
+                        document.getElementById('instr').style.display ="none";
+
+                        document.getElementById('inpmsg').style.display ="inline-block";
+                        document.getElementById('errmsg').style.display ="none";
+                        document.getElementById('cp').innerText=cpu;
+                        document.getElementById('us').innerText=user;
+                                            
+                        //buttons
+                        document.getElementById('try').style.display ="none";
+                        document.getElementById('pl').style.display ="none";
+                        document.getElementById('plag').style.display ="inline-block";
+                                           
+                    }
+
+                }
+    
+        </script>
+
+    <section class="">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div id="bground" class="card text-white" style="border-radius: 1rem; background: rgba(0, 0, 0, 0.64);">
+                        <div class="card-body p-5 text-center">
+                            
+                                <h1 class="fw-bold mb-3 text-uppercase"><i class="far fa-hand-rock"></i> Stone<br><i class="far fa-hand-paper"></i> Paper<br><i class="far fa-hand-scissors"></i> Scissor</h1>
+                            
+                            <div class="align-items-center">
+                                <h3 id="msg" for="input" class="form-lable color mb-2">HOW TO PLAY</h3>
+                                    <h4 id="instr" class="m-3 text-white-50">                                        
+                                        <li>Stone : Enter "S"
+                                        <li>Paper : Enter "P"
+                                        <li>Scissor : Enter "SC"
+                                    </h4>
+                                <!-- </label> -->
+                                <input type="text" placeholder="Enter input here" class="form-control form-control-lg text-center text-uppercase fw-bold" id="input" required/>
+                                                                                                                            
+                                <div class="small text-white-50 mt-2 mb-2">
+                                    <h4 class="fw-lighter py-2" id="errmsg" style="display: none;"></h4>
+                                    <h3 id="inpmsg" style="display: none;">
+                                        <span class="color" id="text"> CPU : <span class="text-white" id="cp"></span></br>User : <span class="text-white" id="us"></span></span>
+                                    </h3>
+                                </div>
+
+                                <button id="pl" class="btn btn-dark btn-outline-light btn-lg px-5 mt-2" type="submit" onclick="game()">Play</button>
+                                <button id="plag" class="btn btn-dark btn-outline-light btn-lg px-5" type="submit" onclick="window.location.reload()" style="display: none;"> Play Again</button>
+                                <button id="try" class="btn btn-dark btn-outline-light btn-lg px-5" type="submit" onclick="window.location.reload()" style="display: none;"> Try Again</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    </body>
+</html>
+
+            
+</html>
+
